@@ -1,0 +1,15 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"promise/bin/promise.js"
+	],
+	"game": [
+		"bin-debug/util/Device.js",
+		"bin-debug/util/TimeFormat.js",
+		"bin-debug/test/test.js",
+		"bin-debug/Main.js",
+		"bin-debug/util/EZCookie.js",
+		"bin-debug/util/util.js"
+	]
+}

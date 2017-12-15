@@ -1,0 +1,10 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.min.js",
+		"libs/modules/egret/egret.web.min.js",
+		"promise/bin/promise.min.js"
+	],
+	"game": [
+		"main.min.js"
+	]
+}
