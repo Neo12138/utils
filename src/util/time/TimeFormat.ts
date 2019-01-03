@@ -90,6 +90,35 @@ namespace zero.util {
             return d + "天 " + h + "小时 " + m + "分钟 " + s + "秒";
         }
 
+        /**
+         * 格式化剩余时间
+         * @param {number} remainTime 剩余时间 秒数
+         * @returns {string} 返回 xx天xx小时xx分xx秒
+         * @constructor
+         */
+        public formatTimeRemain2(remainTime: number): string {
+            let d = 0, h = 0, m = 0, s = 0;
+            if (remainTime >= 0) {
+                d = remainTime / 86400 | 0;
+                h = remainTime / 3600 % 24 | 0;
+                m = remainTime / 60 % 60 | 0;
+                s = remainTime % 60 | 0;
+            }
+            let units: string[] = ['天', '小时', '分钟', '秒'];
+            let values: number[] = [d, h, m, s];
+            let begin, end;
+            //查找第一个不为0的数，和最后一个不为0的数
+            for (begin = 0; begin < values.length && values[begin] == 0; begin++) {
+            }
+            for (end = values.length - 1; end >= 0 && values[end] == 0; end--) {
+            }
 
+            let ret: string = '';
+            for (let i = begin; i <= end; i++) {
+                ret += `${values[i]}${units[i]}`;
+            }
+            if (!ret) ret = `${values[3]}${units[3]}`;
+            return ret;
+        }
     }
 }

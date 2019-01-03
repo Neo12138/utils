@@ -1,4 +1,15 @@
 namespace zero.util {
+    let types = {
+        "undefined": "undefined",
+        "boolean": "boolean",
+        "number": "number",
+        "string": "string",
+        "[object Function]": "function",
+        "[object Array]": "array",
+        "[object Date]": "date",
+        "[object RegExp]": "regexp",
+        "[object Error]": "error"
+    };
     /**
      * 返回基本数据类型和一些常用对象的类型
      *  undefined
@@ -18,19 +29,8 @@ namespace zero.util {
      */
     export function typeOf(object: any): string {
         let toString = Object.prototype.toString;
-        let types = {
-            "undefined": "undefined",
-            "boolean": "boolean",
-            "number": "number",
-            "string": "string",
-            "[object Function]": "function",
-            "[object Array]": "array",
-            "[object Date]": "date",
-            "[object RegExp]": "regexp",
-            "[object Error]": "error"
-        };
         //这个赋值表达式，总是仅取第一个有效值
-        let t = types[typeof object] || types[toString.call (object)] || (object ? "object" : "null");
+        let t = types[typeof object] || types[toString.call(object)] || (object ? "object" : "null");
         if (t === "number") {
             object = +object;
             if (object !== object) {
@@ -59,7 +59,7 @@ namespace zero.util {
         if (value instanceof Array) {
             copy = [];
             for (let i = 0, len = value.length; i < len; i++) {
-                copy[i] = deepClone (value[i]);
+                copy[i] = deepClone(value[i]);
             }
             return copy;
         }
@@ -68,14 +68,14 @@ namespace zero.util {
         if (value instanceof Object) {
             copy = {};
             for (let prop in value) {
-                if (value.hasOwnProperty (prop)) {
-                    copy[prop] = deepClone (value[prop]);
+                if (value.hasOwnProperty(prop)) {
+                    copy[prop] = deepClone(value[prop]);
                 }
             }
             return copy;
         }
 
-        throw new Error ("Unable to copy value!Its type isn't supported.");
+        throw new Error("Unable to copy value!Its type isn't supported.");
     }
 
     /**
@@ -100,8 +100,8 @@ namespace zero.util {
      * @returns {boolean}
      */
     export function objectEqual<T>(v1: T, v2: T): boolean {
-        let prop1 = Object.getOwnPropertyNames (v1);
-        let prop2 = Object.getOwnPropertyNames (v2);
+        let prop1 = Object.getOwnPropertyNames(v1);
+        let prop2 = Object.getOwnPropertyNames(v2);
         //首先比较属性的数量是否相同
         if (prop1.length != prop2.length) {
             return false;
@@ -114,5 +114,21 @@ namespace zero.util {
             }
         }
         return true;
+    }
+
+    /**
+     * 返回两个数组相似的部分
+     * @param {T[]} a
+     * @param {T[]} b
+     * @param {T} ignore 需要忽略的值
+     * @returns {T[]}
+     */
+    export function arraySimilarity<T>(a: T[], b: T[], ignore?: T): T[] {
+        let similarity: T[] = [];
+        for (let i = 0; i < b.length; i++) {
+            if (ignore != void 0 && b[i] == ignore) continue;
+            if (a.indexOf(b[i]) >= 0) similarity.push(b[i]);
+        }
+        return similarity;
     }
 }
