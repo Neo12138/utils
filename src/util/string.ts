@@ -1,4 +1,4 @@
-namespace zero.util {
+namespace zero.utils {
     /**
      * 返回字符串的真实长度，（一个中文算2个字符单位）
      * @param str
@@ -18,7 +18,7 @@ namespace zero.util {
         if (!str) return '';
         let chars = str.split('');
         //长度小于限定的长度，直接返回
-        if (util.stringRealLength(str) <= length) return str;
+        if (stringRealLength(str) <= length) return str;
 
         //超过限定的长度，截取
         let count = 0, i;

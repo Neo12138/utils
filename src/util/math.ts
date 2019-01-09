@@ -1,21 +1,21 @@
-namespace utils.math {
+namespace zero.utils.math {
     /**
-     * 返回[s, e)区间的随机整数
-     * @param s 
-     * @param e
-     * @returns {any}
+     * 返回[from, to)区间的随机整数
+     * @param from
+     * @param to
+     * @returns {number}
      */
-    export function randomInt(s:number, e:number):number {
-        return Math.floor(Math.random() * (e - s)) + s;
+    export function randomInt(from: number, to: number): number {
+        return Math.floor(Math.random() * (to - from)) + from;
     }
 
     /**
-     * 返回[s, e)区间的随机浮点数
-     * @param s
-     * @param e
+     * 返回[from, to)区间的随机浮点数
+     * @param from
+     * @param to
      * @returns {number}
      */
-    export function randomDouble(s:number, e:number):number{
-        return Math.random() * (e - s) + s;
+    export function randomDouble(from: number, to: number): number {
+        return Math.random() * (to - from) + from;
     }
 }

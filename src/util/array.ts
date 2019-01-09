@@ -49,4 +49,20 @@ namespace zero.utils {
         }
         return a;
     }
+
+    /**
+     * 返回两个数组相似的部分
+     * @param {T[]} a
+     * @param {T[]} b
+     * @param {T} ignore 需要忽略的值
+     * @returns {T[]}
+     */
+    export function arraySimilarity<T>(a: T[], b: T[], ignore?: T): T[] {
+        let similarity: T[] = [];
+        for (let i = 0; i < b.length; i++) {
+            if (ignore != void 0 && b[i] == ignore) continue;
+            if (a.indexOf(b[i]) >= 0) similarity.push(b[i]);
+        }
+        return similarity;
+    }
 }

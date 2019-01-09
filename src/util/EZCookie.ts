@@ -1,7 +1,7 @@
 /**
  * Created by Neo on 2017/11/21
  */
-namespace zero.util {
+namespace zero.utils {
     /**
      * 各浏览器之间对Cookie的数量限制基本上是50个，大小基本为4K(所有的key,value,expires,等号)
      */
@@ -18,11 +18,11 @@ namespace zero.util {
          * 由于使用了encodeURIComponent对value编码,因此value可以写入';''='这些会混淆cookie值的字符
          * @param {string} key cookie键
          * @param {string} value cookie值 只能是字符串
-         * @param {number} exdays 过期时间，默认30天
+         * @param {number} expireDays 过期时间，默认30天
          */
-        public set(key: string, value: string, expdays: number = 30): void {
+        public set(key: string, value: string, expireDays: number = 30): void {
             let d = new Date ();
-            d.setTime (d.getTime () + (expdays * 24 * 60 * 60 * 1000));
+            d.setTime (d.getTime () + (expireDays * 24 * 60 * 60 * 1000));
             let expires = "expires=" + d.toLocaleTimeString ();
             document.cookie = key + "=" + encodeURIComponent (value) + "; " + expires;
         }

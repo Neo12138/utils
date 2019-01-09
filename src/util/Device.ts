@@ -1,7 +1,7 @@
 /**
  * Created by Neo on 2017/11/21
  */
-namespace zero.util {
+namespace zero.utils {
     export class Device {
         ////////////////////////////////////////////////////////////////////////////
         //public

@@ -15,4 +15,15 @@ namespace zero.utils {
         }
         return chars.join('');
     }
+
+    /**
+     * 将数字按指定位数输出，不足补0
+     * @param value 数字
+     * @param digits 位数
+     */
+    export function paddingLeft(value: number, digits: number = 2): string {
+        if (!value) value = 0;
+        let len = value.toString().length;
+        return Array(digits - len + 1).join('0') + value;
+    }
 }
