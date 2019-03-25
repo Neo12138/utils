@@ -1,14 +1,10 @@
 /**
  * Created by Neo on 2017/11/21
  */
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var test;
 (function (test) {
-    var util = zero.util;
-    var TimeFormat = zero.util.TimeFormat;
-    var Test = (function () {
+    var util = zero.utils;
+    var Test = /** @class */ (function () {
         ////////////////////////////////////////////////////////////////////////////
         //public
         //请在此处书写所有的公有方法
@@ -62,22 +58,6 @@ var test;
         };
         Test.prototype.testTimeFormat = function () {
             console.log("--------------test timeFormat");
-            var date = new Date(Date.UTC(2017, 10, 21, 16, 0, 0));
-            var tf = new TimeFormat();
-            var locales = "zh-CN";
-            var options = {
-                // weekday: 'long',
-                // year: 'numeric',
-                // month: 'numeric',
-                // day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: false
-            };
-            console.log(date.toLocaleDateString(locales, options), "距离", new Date().toLocaleDateString(locales, options));
-            console.log(tf.formatTimeRemain(date));
-            console.log(tf.formatTimeDistance(date));
         };
         Test.prototype.testCookie = function () {
             console.log("--------------test cookie");
@@ -88,9 +68,18 @@ var test;
             console.log("say:", cookie.get("say"));
             cookie.remove("say");
             console.log("say:", cookie.get("say"));
+            var m = new zero.utils.Map();
+            m.set(1, '1');
+            m.set(2, 2);
+            m.set(3, true);
+            m.set(4, [4]);
+            m.set(5, { "5": 5 });
+            for (var _i = 0, _a = m.keys; _i < _a.length; _i++) {
+                var k = _a[_i];
+                console.log(m.get(k));
+            }
         };
         return Test;
     }());
     test.Test = Test;
-    __reflect(Test.prototype, "test.Test");
 })(test || (test = {}));

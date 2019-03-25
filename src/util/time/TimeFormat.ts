@@ -70,33 +70,11 @@ namespace zero.utils {
         }
 
         /**
-         * 格式化现在距离未来某个时间的剩余时间
-         * @param {Date} endTime
-         * @returns {string}
-         */
-        public formatTimeRemain(endTime: Date): string {
-            let startTime = new Date();
-            let t = endTime.getTime() - startTime.getTime(); //时间差
-            let d = 0,
-                h = 0,
-                m = 0,
-                s = 0;
-            if (t >= 0) {
-                d = Math.floor(t / 1000 / 3600 / 24);
-                h = Math.floor(t / 1000 / 60 / 60 % 24);
-                m = Math.floor(t / 1000 / 60 % 60);
-                s = Math.floor(t / 1000 % 60);
-            }
-            return d + "天 " + h + "小时 " + m + "分钟 " + s + "秒";
-        }
-
-        /**
          * 格式化剩余时间
          * @param {number} remainTime 剩余时间 秒数
          * @returns {string} 返回 xx天xx小时xx分xx秒
-         * @constructor
          */
-        public formatTimeRemain2(remainTime: number): string {
+        public formatTimeRemain(remainTime: number): string {
             let d = 0, h = 0, m = 0, s = 0;
             if (remainTime >= 0) {
                 d = remainTime / 86400 | 0;

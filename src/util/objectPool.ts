@@ -1,7 +1,9 @@
 /**
  * Created by wangcheng on 2019/1/2 16:57.
  */
+
 namespace zero.utils {
+    import SetAlphaNode = egret.sys.SetAlphaNode;
     let objectCount = 1;
 
     export function injectHashCode(obj: Object): void {
@@ -83,5 +85,7 @@ namespace zero.utils {
             poolMap[sign] = pool;
         }
         return pool;
+
     }
+
 }

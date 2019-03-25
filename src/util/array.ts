@@ -8,7 +8,7 @@ namespace zero.utils {
      * @param key
      * @returns {{}}
      */
-    export function arrayToMap<T>(arr: T[], key: string): { [key: number]: T } {
+    export function arrayToMap<T>(arr: T[], key: string): { [key: string]: T } {
         let m = {};
         for (let a of arr) {
             if (a) {
@@ -43,6 +43,8 @@ namespace zero.utils {
         for (let i = 0; i < n; i++) {
             //均匀地在[0, i]上取索引
             let r = Math.random() * (i + 1) | 0;
+            //或者均匀的在[i, n-1]上取索引
+            // let r = Math.random() * (n - i) | 0 + i;
             let swap = a[r];
             a[r] = a[i];
             a[i] = swap;

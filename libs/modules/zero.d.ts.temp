@@ -1,0 +1,200 @@
+declare namespace zero {
+    let enableLog:boolean;
+    function log(message: string, ...args: any[]): void;
+
+    function warn(message: string, ...args: any[]): void;
+
+    function error(message: string, ...args: any[]): void;
+
+    function info(message: string, ...args: any[]): void;
+
+    function debug(message: string, ...args: any[]): void;
+
+    function trace(message: string, ...args: any[]): void;
+}
+
+declare namespace zero.utils {
+    /**
+     * 判断两个数组是否相等
+     * @param v1
+     * @param v2
+     * @returns {boolean}
+     */
+    function arrayEqual<T>(v1: T[], v2: T[]): boolean;
+
+    /**
+     * 返回两个数组相似的部分
+     * @param {T[]} a
+     * @param {T[]} b
+     * @param {T} ignore 需要忽略的值
+     * @returns {T[]}
+     */
+    function arraySimilarity<T>(a: T[], b: T[], ignore?: T): T[]
+
+    /**
+     * 将数组转换为map
+     * @param arr
+     * @param key
+     * @returns {{}}
+     */
+    function arrayToMap<T>(arr: T[], key: string): { [key: string]: T };
+
+    /**
+     * 初始化数字类型的数组
+     * @param len 数组长度
+     * @param start 初始值。默认为0
+     * @param diff 数组前后两个元素的差值。默认为0
+     * @returns {Array}
+     */
+    function initArray(len: number, start?: number, diff?: number): number[];
+
+    /**
+     * 使用Knuth算法打乱数组
+     * @param a 待打乱的数组
+     * @returns {T[]}
+     */
+    function knuthShuffle<T>(a: T[]): T[];
+
+}
+
+declare namespace zero.utils {
+    /**
+     * 返回字符串的真实长度，（一个中文算2个字符单位）
+     * @param str
+     * @returns {number}
+     */
+    function stringRealLength(str: string): number;
+
+    /**
+     * 截取字符串的前几位（中文按两个字符算） 稍微有点误差
+     * @param {string} str
+     * @param {number} length 字符长度（中文一个字占2字符长度）
+     */
+    function stringSlice(str: string, length: number): string;
+}
+
+declare namespace zero.utils {
+    /**
+     * 将数字本地化输出，每3个数字直接用空格或逗号隔开
+     * @param value 需要处理的数字
+     * @param filler 填充的符号。默认为逗号
+     */
+    function toLocaleString(value: number, filler?: string): string;
+
+    /**
+     * 将数字按指定位数输出，不足补0
+     * @param value 数字
+     * @param digits 位数
+     */
+    function paddingLeft(value: number, digits?: number): string;
+}
+
+declare namespace zero.utils {
+    /**
+     * 返回基本数据类型和一些常用对象的类型
+     *  undefined
+     *  boolean
+     *  number
+     *  string
+     *  null
+     *  object
+     *  function
+     *  array
+     *  date
+     *  regexp
+     *  error
+     *  NaN
+     * @param object 被检测的对象
+     * @returns {string} 该对象的类型
+     */
+    function typeOf(object: any): string;
+
+    /**
+     * 值的深拷贝
+     * 支持 3种基本类型 boolean,number,string
+     * 以及 null,undefined
+     * 以及 Array,Object等其他引用类型
+     * @param {T} value 待拷贝的值
+     * @returns {T} 拷贝的值
+     */
+    function deepClone<T>(value: T): T;
+
+    /**
+     * 比较两个对象是否相等
+     * 两个数组的比较也可使用此方法
+     * @param {T} v1
+     * @param {T} v2
+     * @returns {boolean}
+     */
+    function objectEqual<T>(v1: T, v2: T): boolean;
+
+    /**
+     * 获取当前时间戳 格式：yyyy-MM-dd hh:mm:ss.ms
+     */
+    function getTimestamp(): string;
+
+    /**
+     * 填充时间，不足两位补0
+     * @param value
+     */
+    function paddingTime(value: number): string;
+
+    /**
+     * 获取本周的过期时间（通常用于周清数据）
+     * @param day 周几。1：周一， 0或7：周日
+     * @param today 今天的日期，测试时用
+     */
+    function getWeekExpireTime(day?: number, today?: Date): number;
+}
+
+//#objectPool.ts
+declare namespace zero.utils {
+    /**
+     *
+     * @param obj
+     */
+    function injectHashCode(obj: Object): void;
+
+    /**
+     *
+     */
+    interface ObjectPoolImpl<T> {
+        create: () => T;
+        recover: (e: T) => void;
+    }
+
+    /**
+     *
+     * @param clazz
+     */
+    function objectPoolFactory<T>(clazz: new() => T): ObjectPoolImpl<T>;
+
+    class ObjectPool<T> implements ObjectPoolImpl<T> {
+         create(): T;
+
+         recover(e: T): void;
+    }
+
+    /**
+     * 允许使用相同的类，创建不同的对象池。
+     * @param sign 对象池标识符
+     * @param clazz 类名。第一次创建对象池时需要传入，后续可以不传
+     * @returns 对象池
+     */
+    function getPool<T>(sign: string, clazz?: new () => T): ObjectPool<T>;
+}
+
+declare namespace zero.utils {
+    class Map<T> {
+        getIndexByKey(key:any):number;
+        getIndexByValue(value: T): number;
+        set(key: any, value: T): void;
+        get(key: any): T;
+        remove(key: any): void;
+        clear():void;
+        
+        values;
+        keys;
+    }
+    
+}

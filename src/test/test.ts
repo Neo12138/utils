@@ -3,9 +3,8 @@
  */
 
 namespace test {
-    import util = zero.util;
-    import Timer = egret.Timer;
-    import TimeFormat = zero.util.TimeFormat;
+    import util = zero.utils;
+    import TimeFormat = zero.utils.TimeFormat;
 
     export class Test {
         ////////////////////////////////////////////////////////////////////////////
@@ -71,23 +70,6 @@ namespace test {
 
         public testTimeFormat(): void {
             console.log ("--------------test timeFormat");
-            let date = new Date (Date.UTC (2017, 10, 21, 16, 0, 0));
-            let tf = new TimeFormat ();
-            let locales = "zh-CN";
-            let options = {
-                // weekday: 'long',
-                // year: 'numeric',
-                // month: 'numeric',
-                // day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: false
-            };
-
-            console.log (date.toLocaleDateString (locales, options), "距离", new Date ().toLocaleDateString (locales, options));
-            console.log (tf.formatTimeRemain (date));
-            console.log (tf.formatTimeDistance (date));
         }
 
         public testCookie(): void {
