@@ -135,6 +135,7 @@ namespace zero.utils {
     }
 
     /**
+     * 最终版
      * 获取本周的过期时间（通常用于周清数据）
      * @param day 周几。1：周一， 0或7：周日
      * @param today 今天的日期，测试时用
@@ -147,11 +148,43 @@ namespace zero.utils {
         let d = today.getDate();
         let w = today.getDay();
 
-        day = day % 7;
-        let dist = w - day;
-        dist = day > w ? dist + 7 : dist;
-        let todayTime = new Date(y, m, d).getTime();    //今天0点的时间戳
+        let dist = w === 0 ? 7 - day : w - day;
+        dist = dist < 0 ? dist - 7 : dist;
+        let todayTime = new Date(y, m, d).getTime();
 
         return todayTime - 86400000 * dist;
+    }
+
+    /**
+     * 函数节流
+     * 使函数在一段时间内只执行一次
+     * @param method 被节流的函数
+     * @param duration 函数执行的最小间隔时间(单位：ms) 默认值：1000
+     * @returns 被节流后的包装函数
+     */
+    export function throttle(method: (...args: any[]) => void, duration: number = 1000): (...args: any[]) => void {
+        let begin: number;
+        //不能改成箭头函数
+        return function (...args: any[]) {
+            let current = Date.now();
+            if (begin == void 0 || current - begin >= duration) {
+                method.apply(this, args);
+                begin = current;
+            }
+        }
+    }
+
+    /**
+     * 通过使按钮在一段时间内无法点击，以达到函数节流的目的
+     * @param btn
+     * @param delay 按钮恢复的时间（单位：ms）
+     */
+    export function throttleByButton(btn: {touchable:boolean}, delay: number = 1000): void {
+        if (!btn) return;
+        btn.touchable = false;
+
+        setTimeout(() => {
+            if (btn) btn.touchable = true;
+        }, delay);
     }
 }
