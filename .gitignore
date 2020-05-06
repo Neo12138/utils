@@ -3,3 +3,5 @@
 bin-debug/
 bin-release/
 template/
+.idea/workspace.xml
+
